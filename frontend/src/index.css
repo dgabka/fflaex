@@ -1,0 +1,77 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  background-color: var(--dark-bg-base-color);
+  color: var(--dark-fg-base-color);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Rose Pine theme */
+  --dark-bg-base-color: #191724;
+  --dark-bg-surface-color: #1f1d2e;
+  --dark-bg-overlay-color: #26233a;
+  --dark-fg-base-color: #e0def4;
+  --dark-fg-muted-color: #6e6a86;
+  --dark-love-accent-color: #eb6f92;
+  --dark-gold-accent-color: #f6c177;
+  --dark-rose-accent-color: #ebbcba;
+  --dark-pine-accent-color: #31748f;
+  --dark-foam-accent-color: #9ccfd8;
+  --dark-iris-accent-color: #c4a7e7;
+
+  --dark-fg-muted-filter: invert(46%) sepia(7%) saturate(1143%) hue-rotate(209deg) brightness(90%) contrast(93%);
+  --dark-iris-filter: invert(75%) sepia(10%) saturate(1801%) hue-rotate(216deg) brightness(96%) contrast(88%);
+
+
+  /* Rose Pine Dawn theme */
+  --light-bg-base-color: #faf4ed;
+  --light-bg-surface-color: #fffaf3;
+  --light-bg-overlay-color: #f2e9e1;
+  --light-fg-base-color: #575279;
+  --light-fg-muted-color: #9893a5;
+  --light-love-accent-color: #b4637a;
+  --light-gold-accent-color: #ea9d34;
+  --light-rose-accent-color: #d7827e;
+  --light-pine-accent-color: #286983;
+  --light-foam-accent-color: #56949f;
+  --light-iris-accent-color: #907aa9;
+
+  --light-fg-muted-filter: invert(62%) sepia(12%) saturate(341%) hue-rotate(216deg) brightness(94%) contrast(85%);
+  --light-iris-filter: invert(63%) sepia(3%) saturate(3601%) hue-rotate(226deg) brightness(80%) contrast(97%);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: var(--dark-fg-base-color);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    background-color: var(--light-bg-base-color);
+    color: var(--light-fg-base-color);
+  }
+
+  a {
+    color: var(--light-fg-base-color);
+  }
+}

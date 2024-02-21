@@ -1,0 +1,45 @@
+.header {
+  height: 3rem;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: var(--dark-bg-overlay-color);
+
+  .logo {
+    height: 2rem;
+    width: 2rem;
+    transition: all 200ms ease-in;
+  }
+
+  .logo svg {
+    height: 2rem;
+    width: 2rem;
+  }
+
+  .logo :global(#github-icon) {
+    fill: var(--dark-fg-muted-color);
+    transition: all 200ms ease-in;
+  }
+
+  .logo:hover {
+    scale: 1.05;
+  }
+
+  .logo:hover :global(#github-icon) {
+    fill: var(--dark-iris-accent-color);
+  }
+
+  @media (prefers-color-scheme: light) {
+    background-color: var(--light-bg-overlay-color);
+
+    .logo :global(#github-icon) {
+      fill: var(--light-fg-muted-color);
+    }
+
+    .logo:hover :global(#github-icon) {
+      filter: var(--light-iris-accent-color);
+    }
+  }
+}

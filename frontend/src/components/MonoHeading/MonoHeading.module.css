@@ -1,0 +1,43 @@
+.header {
+  margin: 0;
+}
+
+.mono-font {
+  font-family: "Share Tech Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.color-default {
+  color: var(--dark-fg-base-color);
+}
+
+.color-rose {
+  color: var(--dark-rose-accent-color);
+}
+
+.color-pine {
+  color: var(--dark-pine-accent-color);
+}
+
+.color-iris {
+  color: var(--dark-iris-accent-color);
+}
+
+@media (prefers-color-scheme: light) {
+  .color-default {
+    color: var(--light-fg-base-color);
+  }
+
+  .color-rose {
+    color: var(--light-rose-accent-color);
+  }
+
+  .color-pine {
+    color: var(--light-pine-accent-color);
+  }
+
+  .color-iris {
+    color: var(--light-iris-accent-color);
+  }
+}
