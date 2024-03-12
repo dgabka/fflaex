@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { PropsWithChildren } from "react";
 import classes from "./MonoHeading.module.css";
 
@@ -10,10 +9,8 @@ export default function MonoHeading({
   children,
   color = "default",
 }: PropsWithChildren<Props>) {
-  const cls = clsx(
-    classes.header,
-    classes["mono-font"],
-    classes[`color-${color}`],
-  );
+  const cls = `${classes.header} ${classes["mono-font"]} ${
+    classes[`color-${color}`]
+  }`;
   return <h1 className={cls}>{children}</h1>;
 }

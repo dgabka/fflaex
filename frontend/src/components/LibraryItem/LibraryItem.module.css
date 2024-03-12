@@ -1,0 +1,29 @@
+.item-label {
+  color: var(--dark-fg-muted-color);
+  font-size: 10px
+}
+
+.item {
+  margin: 0;
+  font-size: 12px;
+  padding: 0.5rem;
+  background-color: var(--dark-bg-surface-color);
+  border-bottom: 1px solid var(--dark-fg-muted-color);
+  transition: color 0.2s, backgroud-color 0.2s;
+
+  & p {
+    margin: 0
+  }
+
+  &:hover {
+    background-color: var(--dark-bg-overlay-color);
+    color: var(--dark-rose-accent-color);
+  }
+
+  &.active {
+    background-color: var(--dark-bg-overlay-color);
+    color: var(--dark-rose-accent-color);
+    border-left: 3px solid var(--dark-rose-accent-color);
+    padding-left: calc(0.5rem - 3px);
+  }
+}

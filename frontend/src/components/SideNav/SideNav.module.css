@@ -1,7 +1,7 @@
 .nav {
-  display: inline-block;
-  height: calc(100vh - 2rem);
-  min-width: 10rem;
+  grid-area: navbar;
+  height: calc(100vh - 3rem);
+  width: 10rem;
 
   background-color: var(--dark-bg-surface-color);
 }

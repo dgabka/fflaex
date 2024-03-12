@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
-import githubSvg from "../assets/github.svg?raw";
-import MonoHeading from "../components/MonoHeading/MonoHeading";
-import classes from "./header.module.css";
+import { Link } from "@tanstack/react-router";
+import githubSvg from "../../assets/github.svg?raw";
+import MonoHeading from "../MonoHeading/MonoHeading";
+import classes from "./Header.module.css";
 
 export default function Header() {
   return (

@@ -52,6 +52,23 @@ body {
   min-height: 100vh;
 }
 
+#root {
+  display: grid;
+  grid-template-columns: 10rem auto;
+  grid-template-rows: 3rem auto;
+  grid-template-areas:
+    "header header"
+    "navbar main"
+    /* "footer footer footer footer"; */
+}
+
+main {
+  grid-area: main;
+  max-height: calc(100vh - 3rem);
+  padding: 1rem;
+
+}
+
 * {
   box-sizing: border-box;
 }
@@ -63,6 +80,10 @@ ul {
 a {
   text-decoration: none;
   color: var(--dark-fg-base-color);
+}
+
+p {
+  margin: 0;
 }
 
 @media (prefers-color-scheme: light) {

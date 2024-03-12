@@ -1,21 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./index.css";
-import Layout from "./layout/index.tsx";
-import Home from "./pages/home.tsx";
-import LibraryPage from "./pages/library.tsx";
 
-const router = createBrowserRouter([
-  {
-    element: <Layout />,
-    children: [
-      { path: "/", element: <Home /> },
-      { path: "/library", element: <LibraryPage /> },
-      { path: "/settings", element: <div>Settings Page</div> },
-    ],
-  },
-]);
+import { routeTree } from "./routeTree.gen";
+import { RouterProvider, createRouter } from "@tanstack/react-router";
+
+const router = createRouter({ routeTree });
+
+// Register the router instance for type safety
+declare module "@tanstack/react-router" {
+  interface Register {
+    router: typeof router;
+  }
+}
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
