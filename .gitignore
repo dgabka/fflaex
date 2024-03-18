@@ -56,3 +56,6 @@ Session.vim
 
 # SQLite
 *.sqlite
+
+# Mac OS
+.DS_Store
