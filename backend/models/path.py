@@ -1,4 +1,5 @@
 from sqlalchemy import Boolean, Column, Integer, String
+from sqlalchemy.orm import Mapped, mapped_column
 
 from db import Base
 
@@ -6,6 +7,6 @@ from db import Base
 class PathModel(Base):
     __tablename__ = "path_settings"
 
-    id = Column(Integer, primary_key=True)
-    path = Column(String, index=True)
-    include_subdirs = Column(Boolean)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    path: Mapped[str] = mapped_column(index=True)
+    include_subdirs: Mapped[bool]

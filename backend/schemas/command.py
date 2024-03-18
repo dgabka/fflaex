@@ -1,19 +1,11 @@
-from enum import Enum, auto
-from pydantic import BaseModel, PastDatetime, StrictBool
+from enum import StrEnum, auto
+from typing import Optional
+from pydantic import BaseModel, PastDatetime, StrictBool, PositiveInt
 
 
-class Command(Enum):
-    scan_library = auto()
+# class ScanOptionsDto(BaseModel):
+#     pass
 
 
-class CommandBaseSchema(BaseModel):
-    command: Command
-
-
-class CommandRunSchema(CommandBaseSchema):
-    pass
-
-
-class CommandCompleteSchema(CommandBaseSchema):
-    completed_at: PastDatetime
-    success: StrictBool
+class EncodeOptionsDto(BaseModel):
+    id: PositiveInt

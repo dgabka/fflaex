@@ -1,16 +1,16 @@
 from pydantic import BaseModel
 
 
-class PathBaseSchema(BaseModel):
+class PathBaseDto(BaseModel):
     path: str
     include_subdirs: bool
 
 
-class PathCreateSchema(PathBaseSchema):
+class PathCreationDto(PathBaseDto):
     pass
 
 
-class PathSchema(PathBaseSchema):
+class PathDto(PathBaseDto):
     id: int
 
     class Config:
