@@ -3,7 +3,8 @@
   height: calc(100vh - 3rem);
   width: 10rem;
 
-  background-color: var(--dark-bg-surface-color);
+  background-color: var(--dark-bg-base-color);
+  border-right: 1px solid var(--dark-bg-overlay-color);
 }
 
 .nav-list {

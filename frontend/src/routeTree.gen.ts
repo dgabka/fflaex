@@ -11,11 +11,17 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as SettingsImport } from './routes/settings'
 import { Route as LibraryImport } from './routes/library'
 import { Route as IndexImport } from './routes/index'
 import { Route as LibraryItemIdImport } from './routes/library/$itemId'
 
 // Create/Update Routes
+
+const SettingsRoute = SettingsImport.update({
+  path: '/settings',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const LibraryRoute = LibraryImport.update({
   path: '/library',
@@ -44,6 +50,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LibraryImport
       parentRoute: typeof rootRoute
     }
+    '/settings': {
+      preLoaderRoute: typeof SettingsImport
+      parentRoute: typeof rootRoute
+    }
     '/library/$itemId': {
       preLoaderRoute: typeof LibraryItemIdImport
       parentRoute: typeof LibraryImport
@@ -56,6 +66,7 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
   LibraryRoute.addChildren([LibraryItemIdRoute]),
+  SettingsRoute,
 ])
 
 /* prettier-ignore-end */

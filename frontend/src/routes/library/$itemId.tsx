@@ -1,49 +1,35 @@
 import { createFileRoute } from "@tanstack/react-router";
-import classes from "./$itemId.module.css";
+import MetadataTableExpandable from "../../components/MetadataTableExpandable/MetadataTableExpandable";
 import StreamDetails from "../../components/StreamDetails/StreamDetails";
+import { libraryItemQueryOptions } from "../../queries/library";
+import { getFileName } from "../../utils/getFileName";
+import { stripNameFromPath } from "../../utils/getFilePath";
+import classes from "./$itemId.module.css";
 
 export const Route = createFileRoute("/library/$itemId")({
-  loader,
+  loader: ({ context: { queryClient }, params: { itemId } }) =>
+    queryClient.ensureQueryData(libraryItemQueryOptions(+itemId)),
   component: ItemDetails,
 });
 
-async function loader({
-  params: { itemId },
-}: {
-  params: { itemId: string };
-}): Promise<FileData> {
-  const res = await fetch(`http://localhost:8000/api/file/${itemId}`, {
-    mode: "cors",
-    headers: {
-      Accept: "application/json",
-    },
-  });
-  const json = await res.json();
-
-  return json as FileData;
-}
-
 export default function ItemDetails() {
-  const data = Route.useLoaderData();
+  const file = Route.useLoaderData();
 
-  console.log(data);
   return (
     <div className={classes["page-container"]}>
+      <div className={classes["heading-container"]}>
+        <h3 className={classes.heading}>{getFileName(file.filepath)}</h3>
+        <div className={classes["sub-heading"]}>
+          <span className={classes.path}>
+            {stripNameFromPath(file.filepath)}
+          </span>
+          <span className={classes.ext}>mp4</span>
+        </div>
+      </div>
+      <MetadataTableExpandable tags={file.format.tags}/>
       <p>Streams:</p>
-      {data.streams.map((s) => (
-        <StreamDetails data={s} />
-      ))}
-      <p>Streams:</p>
-      {data.streams.map((s) => (
-        <StreamDetails data={s} />
-      ))}
-      <p>Streams:</p>
-      {data.streams.map((s) => (
-        <StreamDetails data={s} />
-      ))}
-      <p>Streams:</p>
-      {data.streams.map((s) => (
-        <StreamDetails data={s} />
+      {file.streams.map((s) => (
+        <StreamDetails key={s.index} data={s} />
       ))}
     </div>
   );

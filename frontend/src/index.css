@@ -65,7 +65,7 @@ body {
 main {
   grid-area: main;
   max-height: calc(100vh - 3rem);
-  padding: 1rem;
+  overflow-y: hidden;
 
 }
 
@@ -84,6 +84,10 @@ a {
 
 p {
   margin: 0;
+}
+
+button {
+  all: unset;
 }
 
 @media (prefers-color-scheme: light) {

@@ -6,7 +6,9 @@
   align-items: center;
   justify-content: space-between;
 
-  background-color: var(--dark-bg-overlay-color);
+  background-color: var(--dark-bg-base-color);
+
+  border-bottom: 1px solid var(--dark-bg-overlay-color);
 
   .logo {
     height: 2rem;
@@ -33,7 +35,8 @@
   }
 
   @media (prefers-color-scheme: light) {
-    background-color: var(--light-bg-overlay-color);
+    background-color: var(--light-bg-base-color);
+    border-bottom-color: var(--light-bg-overlay-color);
 
     .logo :global(#github-icon) {
       fill: var(--light-fg-muted-color);
