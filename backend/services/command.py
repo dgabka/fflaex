@@ -6,6 +6,7 @@ import os
 from models.file import FileModel
 from models.path import PathModel
 from task_runner.main import ffprobe_queue, ffmpeg_queue
+from message_bus import Topic, message_bus
 
 
 async def scan_library(db: Session):
@@ -18,6 +19,7 @@ async def scan_library(db: Session):
         else:
             db.execute(delete(FileModel).where(FileModel.id == f.id))
             db.commit()
+            message_bus.publish(Topic.LIBRARY_ITEM_REMOVED, f.filepath)
 
     paths = db.scalars(select(PathModel)).all()
     print("Trying to get paths")

@@ -1,15 +1,24 @@
-from typing import Callable, Any
+from enum import StrEnum, auto
+from typing import Any
 from time import time
 
 STALE_MESSAGE_AGE = 60
 
 
+class Topic(StrEnum):
+    LIBRARY_ITEM_UPDATED = auto()
+    LIBRARY_ITEM_REMOVED = auto()
+    ENCODING_PROGRESS = auto()
+
+
 class Message:
+    topic: Topic
     data: Any
     is_received: bool = False
     timestamp: float
 
-    def __init__(self, data: Any) -> None:
+    def __init__(self, topic: Topic, data: Any) -> None:
+        self.topic = topic
         self.data = data
         self.timestamp = time()
 
@@ -26,8 +35,8 @@ class Singleton(type):
 class MessageBus(metaclass=Singleton):
     messages: list[Message] = []
 
-    def publish(self, data: Any) -> None:
-        self.messages.append(Message(data))
+    def publish(self, topic: Topic, data: Any) -> None:
+        self.messages.append(Message(topic, data))
 
     def clear_stale(self) -> None:
         timestamp = time()
@@ -47,7 +56,7 @@ class MessageBus(metaclass=Singleton):
         self.clear_stale()
         for msg in self.messages:
             msg.is_received = True
-            return msg.data
+            return {"topic": msg.topic, "data": msg.data}
 
 
 message_bus = MessageBus()

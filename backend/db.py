@@ -11,4 +11,5 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
 class Base(DeclarativeBase):
-    pass
+    def to_dict(self):
+        return {field.name: getattr(self, field.name) for field in self.__table__.c}

@@ -9,8 +9,10 @@ from sse_starlette import EventSourceResponse
 
 import asyncio
 import uvicorn
+import json
+from fastapi.encoders import jsonable_encoder
 
-from event_bus import message_bus
+from message_bus import message_bus
 from routes import path, command, file
 from db import Base, engine
 from task_runner.main import ffmpeg_worker, ffprobe_worker
@@ -49,12 +51,14 @@ app.include_router(file.router)
 @app.get("/stream")
 async def message_stream(request: Request):
     async def event_generator():
+        print("Stream connection open...")
         while True:
             if await request.is_disconnected():
+                print("Stream connection closed...")
                 break
 
             if message_bus.has_messages():
-                yield message_bus.get_message()
+                yield json.dumps(message_bus.get_message())
 
             await asyncio.sleep(1)
 
@@ -68,7 +72,6 @@ app.mount("/assets", StaticFiles(directory="../frontend/dist/assets"), name="ass
 @app.get("/{catchall:path}")
 async def serve_react_app(catchall: str):
     return FileResponse("../frontend/dist/index.html")
-
 
 
 if __name__ == "__main__":

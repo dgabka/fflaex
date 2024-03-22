@@ -1,16 +1,15 @@
 import asyncio
-import time
-import subprocess
 import re
 
 import json
 
-from sqlalchemy import insert, select
+from fastapi.encoders import jsonable_encoder
+from sqlalchemy.dialects.sqlite import insert as sqlite_upsert
 from shlex import quote
 
 from db import SessionLocal
 from models.file import FileModel
-from event_bus import message_bus
+from message_bus import Topic, message_bus
 
 ffmpeg_queue = asyncio.Queue()
 
@@ -39,27 +38,29 @@ async def ffmpeg_worker():
                     + int(match.group("s"))
                 )
                 progress = int(seconds / int(f["duration"].split(".")[0]) * 100)
-                message_bus.publish(progress)
+                message_bus.publish(Topic.ENCODING_PROGRESS, progress)
                 print(f"Progress: {progress}%")
 
 
 ffprobe_queue = asyncio.Queue()
 
 
-def writeOrUpdateFile(filepath: str, data):
+async def upsertFile(filepath: str, data):
     with SessionLocal() as session:
-        result = session.scalar(select(FileModel).where(FileModel.filepath == filepath))
-        if result is None:
-            file = FileModel(
-                filepath=filepath,
-                streams=data["streams"],
-                format=data["format"],
-            )
-            session.add(file)
-        else:
-            result.streams = data["streams"]
-            result.format = data["format"]
+        stmt = sqlite_upsert(FileModel).values(
+            filepath=filepath,
+            streams=data["streams"],
+            format=data["format"],
+        )
+
+        stmt = stmt.on_conflict_do_update(
+            index_elements=[FileModel.filepath],
+            set_=dict(streams=stmt.excluded.streams, format=stmt.excluded.format),
+        )
+
+        result = session.scalars(stmt.returning(FileModel)).one().to_dict()
         session.commit()
+        message_bus.publish(Topic.LIBRARY_ITEM_UPDATED, jsonable_encoder(result))
 
 
 async def ffprobe_worker():
@@ -73,6 +74,4 @@ async def ffprobe_worker():
         data, _ = await process.communicate()
         json_parsed = json.loads(data)
 
-        writeOrUpdateFile(file, json_parsed)
-
-        print(json_parsed["format"]["tags"])
+        await upsertFile(file, json_parsed)
