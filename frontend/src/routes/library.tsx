@@ -1,12 +1,10 @@
 import { Outlet, createFileRoute } from "@tanstack/react-router";
-import LibraryItem from "../components/LibraryItem/LibraryItem";
-
-import classes from "./library.module.css";
-import LibraryToolbar from "../components/LibraryToolbar/LibraryToolbar";
-import { libraryQueryOptions } from "../queries/library";
-import { useQuery } from "@tanstack/react-query";
-import { useLibraryStore } from "../hooks/useLibraryStore";
 import { useEffect } from "react";
+import LibraryItem from "@components/LibraryItem/LibraryItem";
+import LibraryToolbar from "@components/LibraryToolbar/LibraryToolbar";
+import { useLibraryStore } from "@hooks/useLibraryStore";
+import { libraryQueryOptions } from "@queries/library";
+import classes from "./library.module.css";
 
 export const Route = createFileRoute("/library")({
   component: LibraryPage,
@@ -30,7 +28,7 @@ export default function LibraryPage() {
       <div className={classes["page-container"]}>
         <ul className={classes.list}>
           {items.map((item) => (
-            <LibraryItem item={item} key={item.id} />
+            <LibraryItem file={item} key={item.id} />
           ))}
         </ul>
         <Outlet />

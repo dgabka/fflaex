@@ -1,4 +1,3 @@
-import { QueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useLibraryStore } from "./useLibraryStore";
 
@@ -9,7 +8,7 @@ interface LibraryItemUpdatedMessage {
   data: FileData;
 }
 
-export const useEventStream = (queryClient: QueryClient) => {
+export const useEventStream = () => {
   const { upsertItem } = useLibraryStore();
   useEffect(() => {
     const eventSource = new EventSource("http://localhost:8000/stream");
@@ -26,5 +25,5 @@ export const useEventStream = (queryClient: QueryClient) => {
 
     // terminating the connection on component unmount
     return () => eventSource.close();
-  }, []);
+  }, [upsertItem]);
 };

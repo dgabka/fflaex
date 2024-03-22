@@ -1,12 +1,11 @@
+import { QueryClient } from "@tanstack/react-query";
 import {
-  createRootRoute,
   createRootRouteWithContext,
   Outlet,
 } from "@tanstack/react-router";
-import { QueryClient } from "@tanstack/react-query";
-import Header from "../components/Header/Header";
-import SideNav from "../components/SideNav/SideNav";
-import { useEventStream } from "../hooks/useEventStream";
+import Header from "@components/Header/Header";
+import SideNav from "@components/SideNav/SideNav";
+import { useEventStream } from "@hooks/useEventStream";
 
 interface Context {
   queryClient: QueryClient;
@@ -17,8 +16,7 @@ export const Route = createRootRouteWithContext<Context>()({
 });
 
 export default function Layout() {
-  const { queryClient } = Route.useRouteContext();
-  useEventStream(queryClient);
+  useEventStream();
   return (
     <>
       <Header />

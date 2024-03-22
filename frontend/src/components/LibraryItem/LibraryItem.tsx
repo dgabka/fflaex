@@ -1,22 +1,20 @@
 import { Link } from "@tanstack/react-router";
+import { getFileName } from "@utils/getFileName";
 import classes from "./LibraryItem.module.css";
 
-interface File {
-  id: number;
-  filepath: string;
-  streams: Record<string, any>;
-  format: Record<string, any>;
+interface Props {
+  file: FileData;
 }
 
-export default function LibraryItem(props: { item: File }) {
+export default function LibraryItem({ file }: Props): JSX.Element {
   return (
     <Link
-      to={props.item.id.toString()}
+      to={file.id.toString()}
       className={classes.item}
       activeProps={{ className: classes.active }}
     >
       <p className={classes["item-label"]}>filename:</p>
-      <p>{props.item.filepath.split("/").pop()}</p>
+      <p>{getFileName(file.filepath)}</p>
     </Link>
   );
 }

@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import MetadataTableExpandable from "../../components/MetadataTableExpandable/MetadataTableExpandable";
-import StreamDetails from "../../components/StreamDetails/StreamDetails";
-import { libraryItemQueryOptions } from "../../queries/library";
-import { getFileName } from "../../utils/getFileName";
-import { stripNameFromPath } from "../../utils/getFilePath";
+import MetadataTableExpandable from "@components/MetadataTableExpandable/MetadataTableExpandable";
+import StreamDetails from "@components/StreamDetails/StreamDetails";
+import { libraryItemQueryOptions } from "@queries/library";
+import { getFileName } from "@utils/getFileName";
+import { stripNameFromPath } from "@utils/getFilePath";
 import classes from "./$itemId.module.css";
 
 export const Route = createFileRoute("/library/$itemId")({
