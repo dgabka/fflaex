@@ -33,3 +33,22 @@
   }
 }
 
+.streams-heading {
+  margin: 0;
+  padding: 1rem;
+  border-bottom: 1px solid var(--dark-bg-overlay-color);
+}
+
+.streams-list {
+  margin: 0;
+  padding: 0.5rem 0;
+}
+
+/* .stream-data { */
+/*   padding: 0.5rem 1rem; */
+/* } */
+
+.stream-item {
+  padding: 0.5rem 1rem;
+}
+

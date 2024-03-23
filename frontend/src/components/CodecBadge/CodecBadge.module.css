@@ -1,0 +1,31 @@
+.badge {
+  display: inline-block;
+  text-transform: uppercase;
+  border-radius: 1rem;
+  font-weight: 900;
+  font-size: 0.75rem;
+  overflow: hidden;
+
+  & .badge-label {
+  padding: 0.125rem .5rem;
+    background-color: var(--dark-bg-overlay-color);
+
+  }
+
+  & .badge-value {
+  color: var(--dark-bg-base-color);
+  padding: 0.125rem .5rem;
+
+    &.video {
+      background-color: var(--dark-rose-accent-color);
+    }
+
+    &.audio {
+      background-color: var(--dark-foam-accent-color);
+    }
+
+    &.subtitle {
+      background-color: var(--dark-pine-accent-color);
+    }
+  }
+}
